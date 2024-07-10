@@ -1,0 +1,605 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow: hidden;
+}
+
+.main::-webkit-scrollbar {
+    width: 0px;
+}
+
+.header {
+    width: 100%;
+    height: 70px;
+    background-color: rgb(30, 26, 26);
+}
+
+.center-row {
+    display: flex;
+    align-items: center;
+}
+
+.header .col-3 {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header .inner-logo a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: white;
+}
+
+.header .inner-logo img {
+    height: 60px;
+    aspect-ratio: 1/1;
+}
+
+.body {
+    display: flex;
+    width: 100%;
+    min-height: calc(100vh - 70px);
+}
+
+.body .sider {
+    width: 17%;
+    background-color: rgb(39, 37, 37);
+    min-height: calc(100vh - 70px);
+    color: white;
+}
+
+.sider .inner-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sider .inner-menu ul li a {
+    color: #fff;
+    display: block;
+    padding: 6px 10px;
+    border-bottom: 1px solid #515151;
+}
+
+.main {
+    width: 83%;
+    background-color: #25282A;
+    padding-bottom: 20px;
+    color: #fff;
+    max-height: calc(100vh - 70px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.main>h1 {
+    margin-left: 20px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+}
+
+.main .filter {
+    width: 96%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main .filter .filter-list {
+    display: flex;
+}
+
+.main .filter .filter-list .btn {
+    border-radius: 10px;
+    background: #e0e0e0;
+    box-shadow: 5px 5px 12px #b3b3b3,
+        -5px -5px 12px #ffffff;
+    margin-right: 7px;
+}
+
+.main .filter .filter-list .btn.active {
+    border-radius: 10px;
+    background: #11e835;
+    box-shadow: 5px 5px 12px #0eba2bd1,
+        -5px -5px 12px #14ff3fd5;
+}
+
+/* btn filter  */
+.btn {
+    --border-color: linear-gradient(-45deg, #ffae00, #7e03aa, #00fffb);
+    --border-width: 0.125em;
+    --curve-size: 0.5em;
+    --blur: 30px;
+    --bg: #080312;
+    --color: #afffff;
+    color: var(--color);
+    cursor: pointer;
+    position: relative;
+    isolation: isolate;
+    display: inline-grid;
+    place-content: center;
+    padding: 0.5em 1.3em;
+    font-size: 15px;
+    border: 0;
+    text-transform: uppercase;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+    clip-path: polygon(0% var(--curve-size),
+            var(--curve-size) 0,
+            100% 0,
+            100% calc(100% - var(--curve-size)),
+            calc(100% - var(--curve-size)) 100%,
+            0 100%);
+    transition: color 250ms;
+}
+
+.btn::after,
+.btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.btn::before {
+    background: var(--border-color);
+    background-size: 300% 300%;
+    animation: move-bg7234 5s ease infinite;
+    z-index: -2;
+}
+
+@keyframes move-bg7234 {
+    0% {
+        background-position: 31% 0%;
+    }
+
+    50% {
+        background-position: 70% 100%;
+    }
+
+    100% {
+        background-position: 31% 0%;
+    }
+}
+
+.btn::after {
+    background: var(--bg);
+    z-index: -1;
+    clip-path: polygon(var(--border-width) calc(var(--curve-size) + var(--border-width) * 0.5),
+            calc(var(--curve-size) + var(--border-width) * 0.5) var(--border-width),
+            calc(100% - var(--border-width)) var(--border-width),
+            calc(100% - var(--border-width)) calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+            calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)) calc(100% - var(--border-width)),
+            var(--border-width) calc(100% - var(--border-width)));
+    transition: clip-path 500ms;
+}
+
+.btn:where(:hover, :focus)::after {
+    clip-path: polygon(calc(100% - var(--border-width)) calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+            calc(100% - var(--border-width)) var(--border-width),
+            calc(100% - var(--border-width)) var(--border-width),
+            calc(100% - var(--border-width)) calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+            calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)) calc(100% - var(--border-width)),
+            calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)) calc(100% - var(--border-width)));
+    transition: 200ms;
+}
+
+.btn:where(:hover, :focus) {
+    color: #fff;
+}
+
+.btn.active::after {
+    clip-path: polygon(calc(100% - var(--border-width)) calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+            calc(100% - var(--border-width)) var(--border-width),
+            calc(100% - var(--border-width)) var(--border-width),
+            calc(100% - var(--border-width)) calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)),
+            calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)) calc(100% - var(--border-width)),
+            calc(100% - calc(var(--curve-size) + var(--border-width) * 0.5)) calc(100% - var(--border-width)));
+    transition: 200ms;
+}
+
+.btn.active {
+    color: #fff;
+}
+
+/* End btn filter  */
+
+/* Input  */
+.containerInput {
+    background-color: #000;
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0 0 4px 0;
+    z-index: 1;
+    font-size: 15px;
+}
+
+.containerInput::before {
+    content: '';
+    width: 110%;
+    aspect-ratio: 1;
+    position: absolute;
+    inset: 0 0 0 0;
+    margin: auto;
+    animation: rotate6234 2.5s ease-in-out infinite;
+    z-index: -1;
+    background-image: conic-gradient(from 0deg at 50% 50%, #073AFF00 0%, #FF0000FF 25%, #073AFF00 25%);
+}
+
+.containerInput>input {
+    width: 410px;
+    height: 50px;
+    font-size: inherit;
+    color: #fff;
+    border: none;
+    padding: 12px;
+    background-color: #0a0a0a;
+    outline: 5px solid #0a0a0a;
+}
+
+.containerInput>input:focus {
+    outline: none;
+}
+
+.containerInput>input:not(:placeholder-shown) {
+    outline: none;
+}
+
+.containerInput>input:not(:placeholder-shown):valid {
+    outline: 4px solid rgb(0, 255, 183);
+    border-radius: 0;
+}
+
+@keyframes rotate6234 {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* End Input  */
+
+/* Active */
+.inner-active {
+    width: 80%;
+    position: relative;
+    height: 40px;
+    /* padding: 0 30px; */
+    border: 2px solid #000;
+    background: #a55c5c00;
+    user-select: none;
+    white-space: nowrap;
+    transition: all .05s linear;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inner-active:before,
+.inner-active:after {
+    content: "";
+    position: absolute;
+    background: #11e835;
+    transition: all .2s linear;
+}
+
+.inner-inactive:before,
+.inner-inactive:after {
+    content: "";
+    position: absolute;
+    background: #e83211;
+    transition: all .2s linear;
+}
+
+.inner-active:before {
+    width: calc(100% + 6px);
+    height: calc(100% - 16px);
+    top: 8px;
+    left: -3px;
+}
+
+.inner-active:after {
+    width: calc(100% - 16px);
+    height: calc(100% + 6px);
+    top: -3px;
+    left: 8px;
+}
+
+.inner-active:active {
+    transform: scale(0.95);
+}
+
+.inner-active:hover:before {
+    height: calc(100% - 32px);
+    top: 16px;
+}
+
+.inner-active:hover:after {
+    width: calc(100% - 32px);
+    left: 16px;
+}
+
+.inner-active span {
+    font-size: 15px;
+    z-index: 3;
+    position: relative;
+    font-weight: 600;
+}
+
+/* End Active */
+.product-list {
+    margin: auto;
+    margin-top: 20px;
+    width: 96%;
+}
+
+.green {
+    background: #11e835;
+    box-shadow: 5px 5px 12px #0eba2a,
+        -5px -5px 12px #14ff40;
+}
+
+.red {
+    background: #e83211;
+    box-shadow: 5px 5px 12px #ba280e,
+        -5px -5px 12px #ff3c14;
+}
+
+.product-list .product {
+    width: 100%;
+}
+
+.product-list .product tr {
+    display: flex;
+    height: 80px;
+    width: 100%;
+}
+
+.product td {
+    border: 1px #515151;
+    border-style: solid;
+}
+
+.product td:nth-child(1) {
+    width: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product td:nth-child(2) {
+    width: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product td:nth-child(3) {
+    width: 40%;
+    padding-left: 10px;
+    display: flex;
+}
+
+.product td:nth-child(3) img {
+    width: 70px;
+    aspect-ratio: 1/1;
+    border: 1px solid #515151;
+}
+
+.product td:nth-child(3) p {
+    margin-top: -20px;
+    margin-left: 10px;
+}
+
+.product td:nth-child(4) {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product td:nth-child(5) {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product td:nth-child(6) {
+    width: 15%;
+    height: 80px;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product td:nth-child(6) p {
+    margin: auto;
+}
+
+.product td:nth-child(7) {
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.product td:nth-child(7) button {
+    background: #fff;
+    border: none;
+    padding: 3px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-weight: 500;
+    width: 100px;
+    height: 30px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transform: skew(-21deg);
+}
+
+.product td:nth-child(7) button span {
+    display: inline-block;
+    transform: skew(21deg);
+}
+
+.product td:nth-child(7) button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    left: 0;
+    background: rgb(20, 20, 20);
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.5s;
+}
+
+.product td:nth-child(7) button:hover {
+    color: #fff;
+}
+
+.product td:nth-child(7) button:hover::before {
+    left: 0;
+    right: 0;
+    opacity: .5;
+}
+
+/* aaaa */
+
+.product td:nth-child(7) button:nth-child(1) {
+    background: linear-gradient(145deg, #c4d10f72, #e9f812);
+}
+
+.product td:nth-child(7) button:nth-child(2) {
+    background: #e83211;
+}
+
+.pagination {
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.pagination .active {
+    background-color: blue;
+    color: white;
+    border: blue;
+}
+
+.form-action {
+    display: flex;
+    justify-content: space-between;
+    width: 96%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.form-action form {
+    display: flex;
+    align-items: center;
+    height: 40px;
+}
+
+.select-change {
+    display: flex;
+}
+
+.select-change .form-select {
+    display: flex;
+    margin-right: 15px;
+}
+
+.select-change .form-select .btn {
+    margin-left: 15px;
+}
+
+.container {
+    position: relative;
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+.container input,textarea {
+    width: 100%;
+    background: transparent;
+    outline: none;
+    border: none;
+    color: #e0afaf;
+    padding: 8px;
+    border: 1px solid #515151;
+    border-radius: 5px;
+}
+.container label {
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: rgba(105, 105, 105, 0.7);
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: .5s;
+    font-weight: bold;
+}
+
+.container input:valid~label,
+.container input:focus~label,
+.container textarea:focus~label,
+.container textarea:not(:empty)~label {
+    color: rgb(10, 131, 212);
+    transform: translateY(-15px);
+    font-size: 0.6rem;
+}
+
+.container i {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: #222;
+}
+
+.container i:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff1b69, #ff0, #2196f3, #9c27b0, #ff1b69);
+    animation: animate 3s linear infinite;
+}
+form .create{
+    margin-left: 60px;
+    width: 300px;
+    height: 40px;
+}
+.container-status{
+    display: flex;
+    margin-left: 6%;
+    align-items: center;
+    height: 40px;
+}
+.container-status label{
+    margin-left: 5px;
+    margin-right: 20px;
+}
+.none{
+    display: none;
+}

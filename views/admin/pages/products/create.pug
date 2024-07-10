@@ -1,0 +1,71 @@
+extends ../../layouts/default.pug
+block main
+    h1 Page Create Product
+    form(
+        action=`${prefixAdmin}/products/create`
+        id='form-create-product'
+        method="POST"
+        enctype='multipart/form-data'
+    )
+        .container
+            input(
+                type="text"
+                name='title' 
+                id='title'
+                required="required"
+            )
+            label(for='title') Title
+        .container
+            textarea(
+                name="description" 
+                id="description" 
+                rows="3"
+            ) 
+            label(for='description') Description
+        .container
+            input(
+                type="number"
+                name='price' 
+                id='price' 
+            )
+            label(for='price') Price
+        .container
+            input(
+                type="number"
+                name='descountPercentage' 
+                id='discountPercentage' 
+            )
+            label(for='discountPercentage') Discount Percentage
+        .container
+            input(
+                type="number"
+                name='stock' 
+                id='stock' 
+            )
+            label(for='stock') Stock
+        .container
+            input(
+                type="file" 
+                class='form-control-file'
+                name='thumbnail' 
+                id='thumbnail' 
+                accept='image/*'
+            )
+            label(for='thumbnail') Thumbnail
+        .container-status
+            input(type="radio" 
+            name='status' 
+            id='statusActive' 
+            value='active'
+            checked
+        )
+            label(for='statusActive') Active
+            input(type="radio" 
+            name='status' 
+            id='statusInactive' 
+            value='inactive'
+            checked
+        )
+            label(for='statusInactive') Inactive
+        button(type='submit' class='btn create') + Create
+    script(src="/admin/js/create.js") 

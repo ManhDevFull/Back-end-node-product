@@ -1,0 +1,106 @@
+extends ../../layouts/default.pug
+include ../../mixins/filter-status.pug
+block main
+    h1 Page Product
+    .filter
+        .filter-list 
+            +filter-status(finderStatus)
+        .containerInput
+            input(placeholder="Search...", id='formSearch', type="text", value=keySearch)
+    .form-action 
+        form(
+            action=`${prefixAdmin}/products/change-multi?_method=PATCH`
+            method="POST"
+            form-change-multi
+        )
+            .select-change 
+                .form-select 
+                    select(name='type' class='form-control')
+                        option(value='active') Action
+                        option(value='inactive') Inaction
+                .form-select
+                    input(
+                        type='text'
+                        name='ids'
+                        value=''
+                        class='form-control none'
+                    )
+            button(type='submit', class='btn') apply
+        .create-product 
+            a(
+                class='btn'
+                href=`${prefixAdmin}/products/create`
+            ) + Create
+    .product-list 
+        table(
+            class='product'
+            table-check-all 
+        )
+            tr 
+                td 
+                    input(type='checkbox' name='check-all')
+                td STT
+                td(class='center-row') Product
+                td Price
+                td Stock
+                td Status
+                td Actions
+            each item, index in products
+                tr 
+                    td 
+                        input(
+                            type='checkbox'
+                            name='check'
+                            value=item.id)
+                    td(class='center') #{index + 1}
+                    td(class='center-row') 
+                        img(src=item.thumbnail) 
+                        p #{item.title}
+                    td(class='center') #{item.price}$
+                    td(class='center') #{item.stock}
+                    td(class='center') 
+                        if item.status == 'inactive'
+                            p(
+                                class='red inner-active inner-inactive'
+                                data-status=item.status
+                                data-id=item.id 
+                                btn-change-status
+                            )
+                                span #{item.status}
+                        else
+                            p(
+                                class='green inner-active'
+                                data-status=item.status
+                                data-id=item.id 
+                                btn-change-status
+                            ) 
+                                span #{item.status}
+                    td(class="center")
+                        if item.status == 'active'
+                            button 
+                                span Update
+                            button
+                                span Delete
+                        else
+                            button
+                                span restore
+    nav 
+        ul(class='pagination') 
+            if(objectPage.current > 1)
+                li(class='page-item')
+                        button(class='page-link' btn-page=objectPage.current - 1) <<
+            - for (var i = 1; i <= objectPage.totalPage; i++)
+                li(class=`page-item ${objectPage.current == i ? "active" : ""}`)
+                    button(class='page-link' btn-page=i) #{i} 
+            if(objectPage.current < objectPage.totalPage)
+                li(class='page-item')
+                        button(class='page-link' btn-page=objectPage.current + 1) >>
+
+    form(
+        action=""
+        method="POST"
+        id='form-change-status'
+        data-path=`${prefixAdmin}/products/change-status`
+    ) 
+
+    script(src="/admin/js/products.js") 

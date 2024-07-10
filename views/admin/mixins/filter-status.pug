@@ -1,0 +1,6 @@
+mixin filter-status(finderStatus)
+    each item in  finderStatus
+        button(
+            class=`btn ${item.class}`
+            btn-status=item.status
+        ) #{item.name}
