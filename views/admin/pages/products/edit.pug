@@ -1,9 +1,9 @@
 extends ../../layouts/default.pug
 block main
-    h1 Page Create Product
+    h1 Page Edit Product
     form(
-        action=`${prefixAdmin}/products/create`
-        id='form-create-product'
+        action=`${prefixAdmin}/products/edit/${product.id}?_method=PATCH`
+        id='form-edit-product'
         method="POST"
         enctype='multipart/form-data'
     )
@@ -13,6 +13,7 @@ block main
                 name='title' 
                 id='title'
                 required="required"
+                value=product.title
             )
             label(for='title') Title
         .container
@@ -20,13 +21,14 @@ block main
                 name="description" 
                 id="description" 
                 rows="3"
-            ) 
+            ) !{product.description}
             label(for='description') Description
         .container
             input(
                 type="number"
                 name='price' 
                 id='price' 
+                value=product.price
             )
             label(for='price') Price
         .container
@@ -34,6 +36,7 @@ block main
                 type="number"
                 name='descountPercentage' 
                 id='discountPercentage' 
+                value=product.descountPercentage
             )
             label(for='discountPercentage') Discount Percentage
         .container
@@ -41,6 +44,7 @@ block main
                 type="number"
                 name='stock' 
                 id='stock' 
+                value=product.stock
             )
             label(for='stock') Stock
         .container
@@ -58,7 +62,7 @@ block main
                 name='status' 
                 id='statusActive' 
                 value='active'
-                checked
+                checked= product.status == 'active' ? true : false
             )
             label(for='statusActive') Active
             input(
@@ -66,7 +70,7 @@ block main
                 name='status' 
                 id='statusInactive' 
                 value='inactive'
+                checked=product.status == "inactive" ? true : false
             )
             label(for='statusInactive') Inactive
-        button(type='submit' class='btn create') + Create
-    script(src="/admin/js/create.js") 
+        button(type='submit' class='btn create') Update

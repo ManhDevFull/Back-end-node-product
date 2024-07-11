@@ -73,7 +73,7 @@ html {
 .main {
     width: 83%;
     background-color: #25282A;
-    padding-bottom: 20px;
+    padding: 20px;
     color: #fff;
     max-height: calc(100vh - 70px);
     overflow-y: auto;
@@ -81,9 +81,7 @@ html {
 }
 
 .main>h1 {
-    margin-left: 20px;
     padding-bottom: 20px;
-    padding-top: 10px;
 }
 
 .main .filter {
@@ -603,3 +601,11 @@ form .create{
 .none{
     display: none;
 }
+/* Detail */
+.detail {
+    width: 100%;
+}
+.detail .product-img img{
+    width: 100%;
+}
+/* End Detail */

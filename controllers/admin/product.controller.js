@@ -72,3 +72,34 @@ module.exports.createPost = async (req, res) => {
     await product.save()
     res.redirect(`${systemConfig.prefixAdmin}/products`)
 }
+module.exports.edit = async (req, res) => {
+    let find = {
+        deleted: false,
+        _id: req.params.id
+    }
+    const products = await Product.findOne(find)
+    res.render("admin/pages/products/edit", {
+        pageTitle: "Edit Product",
+        product: products
+    })
+}
+module.exports.editPatch = async (req, res) => {
+    const id = req.params.id
+    req.body.price = parseInt(req.body.price)
+    req.body.descountPercentage = parseInt(req.body.descountPercentage)
+    req.body.stock = parseInt(req.body.stock)
+    await Product.updateOne({ _id: id }, req.body)
+    res.redirect('back')
+}
+
+module.exports.details = async (req, res) => {
+    let find = {
+        deleted: false,
+        _id:  req.params.id
+    }
+    const products = await Product.findOne(find)
+    res.render("admin/pages/products/detail", {
+        pageTitle: products.title,
+        product: products,
+    })
+}

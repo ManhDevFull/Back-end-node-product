@@ -1,0 +1,15 @@
+extends ../../layouts/default.pug
+block main
+    h1 Page Detail Product
+    .detail 
+        h5 Tên sản phẩm: #{product.title}
+        p Mô tả sản phẩm: !{product.description}
+        p Giá sản phẩm: #{product.price}$
+        p Chiết khấu giảm giá: -#{product.descountPercentage}%
+        p Giá sau hiết khấu: #{product.price * (100 - product.descountPercentage)/100}$
+        .product-img 
+            p Hình ảnh sản phẩm: 
+            img(src=product.thumbnail)
+        p Tồn kho: #{product.stock}
+        p Ngày tạo: #{product.createdAt}
+        p Chỉnh sửa lần cuối: #{product.updatedAt}

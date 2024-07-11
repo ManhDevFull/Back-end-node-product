@@ -55,7 +55,9 @@ block main
                     td(class='center') #{index + 1}
                     td(class='center-row') 
                         img(src=item.thumbnail) 
-                        p #{item.title}
+                        a(
+                            href=`${prefixAdmin}/products/details/${item.id}`
+                        ) #{item.title}
                     td(class='center') #{item.price}$
                     td(class='center') #{item.stock}
                     td(class='center') 
@@ -78,7 +80,10 @@ block main
                     td(class="center")
                         if item.status == 'active'
                             button 
-                                span Update
+                                a(
+                                    href=`${prefixAdmin}/products/edit/${item.id}`
+                                ) 
+                                    span Update
                             button
                                 span Delete
                         else
